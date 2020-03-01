@@ -1,12 +1,13 @@
 try:
     import time
+    import unicodedata
     from data_manager import DataManager
 except ImportError as ie:
     print(f"IMPORT ERROR -> {ie}")
 
 
 class Cleaner(object):
-    """ Class used for cleaning texts from unwanted signs.
+    """ Class used for cleaning texts from unwanted marks.
 
     - lowering
     - removing punctuation
@@ -28,12 +29,11 @@ class Cleaner(object):
         
         Returns:
             str -- [lowercased text]
-
         """
         return text.lower()
 
     def remove_punctuation(self, text:str) -> str:
-        """ Returns text without punctuation marks.
+        """ Removing punctuation marks from text.
         
         Arguments:
             text {str} -- [text]
@@ -43,5 +43,32 @@ class Cleaner(object):
         """
         punctuation_marks = DataManager().get_punctuation()
         for mark in punctuation_marks:
+            text = text.replace(mark, "")
+        return text
+
+    def remove_diacritical(self, text:str) -> str:
+        """ Removing diacritical marks from text.
+        
+        Arguments:
+            text {str} -- [text]
+        
+        Returns:
+            str -- [text without diacritical marks]
+        """
+        return unicodedata.normalize('NFKD', text).replace("ł", "l").encode('ASCII', 'ignore').decode("utf-8")
+        # diacritical = DataManager().get_diacritical()
+        # TODO create a map, where diacritical is key, and clear mark is value
+
+    def remove_stopwords(self, text:str) -> str:
+        """ Removing stopwords from text.
+        
+        Arguments:
+            text {str} -- [text]
+        
+        Returns:
+            str -- [text without stopwords]
+        """
+        stopwords = DataManager().get_stopwords()
+        for mark in stopwords:
             text = text.replace(mark, "")
         return text

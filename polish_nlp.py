@@ -1,10 +1,10 @@
 try:
     import time
-    from cleaner import Cleaner
-    from tokenizer import Tokenizer
-    from corrector import Corrector
-    from normalizer import Normalizer
-    from vectorizer import Vectorizer
+    from modules.cleaner import Cleaner
+    from modules.tokenizer import Tokenizer
+    from modules.corrector import Corrector
+    from modules.normalizer import Normalizer
+    from modules.vectorizer import Vectorizer
 except ImportError as ie:
     print(f"IMPORT ERROR -> {ie}")
 
