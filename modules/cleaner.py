@@ -15,6 +15,7 @@ class Cleaner(object):
     - removing stopwords
     - removing rarewords
     - removing frequent words
+    TODO - add is_x methods - checking correctivity of given word/sentence
     
     """
 
@@ -55,9 +56,11 @@ class Cleaner(object):
         Returns:
             str -- [text without diacritical marks]
         """
-        return unicodedata.normalize('NFKD', text).replace("ł", "l").encode('ASCII', 'ignore').decode("utf-8")
-        # diacritical = DataManager().get_diacritical()
-        # TODO create a map, where diacritical is key, and clear mark is value
+        diacritical = DataManager().get_diacritical()
+        for key, value in diacritical.items():
+            text = text.replace(key, value) # replacing lowercase marks
+            text = text.replace(key.upper(), value.upper()) # replacing uppercase marks
+        return text
 
     def remove_stopwords(self, text:str) -> str:
         """ Removing stopwords from text.

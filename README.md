@@ -1,2 +1,2 @@
 # polish-nlp
-Polish language NLP modules and scripts. <br>
+Polish language NLP module. <br>

@@ -35,8 +35,10 @@ class DataManager(object):
         Returns:
             Iterable[str] -- [list of diacritical marks.]
         """
-        data = pandas.read_fwf(self.DATA_FILES["diacritical"])
-        diacritical_marks = [ "".join(mark) for mark in data.values.tolist() ]
+        diacritical_marks = {} # initialization of empty polish mark map
+        data = pandas.read_fwf(self.DATA_FILES["diacritical"], delimiter=",", header = None).values
+        for row in data:
+            diacritical_marks[row[0]] = row[1] # {polish_mark = clear_mark}
         return diacritical_marks
 
 
