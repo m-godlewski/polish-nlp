@@ -35,12 +35,25 @@ class DataManager(object):
         Returns:
             Iterable[str] -- [list of diacritical marks.]
         """
-        diacritical_marks = {} # initialization of empty polish mark map
         data = pandas.read_fwf(self.DATA_FILES["diacritical"], delimiter=",", header = None).values
-        for row in data:
-            diacritical_marks[row[0]] = row[1] # {polish_mark = clear_mark}
+        diacritical_marks = [ row[0] for row in data ]
         return diacritical_marks
 
+    def get_diacritical_map(self) -> dict:
+        """ Return map of polish diacritical marks and latin marks.
+
+        {
+            "polish diacritical mark" : "latin mark"
+        }
+        
+        Returns:
+            dict -- [map of polish diacritical marks and latin marks.]
+        """
+        diacritical_marks = {}
+        data = pandas.read_fwf(self.DATA_FILES["diacritical"], delimiter=",", header = None).values
+        for row in data:
+            diacritical_marks[row[0]] = row[1] # {polish mark = latin mark}
+        return diacritical_marks
 
     def get_stopwords(self) -> Iterable[str]:
         """ Return list of stopwords.

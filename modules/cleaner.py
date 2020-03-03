@@ -33,6 +33,21 @@ class Cleaner(object):
         """
         return text.lower()
 
+    def has_punctuation(self, text:str) -> bool:
+        """ Checking if text contains punctuation marks.
+        
+        Arguments:
+            text {str} -- [text]
+        
+        Returns:
+            bool -- [ True - if text have punctuation marks | False - if text don't have punctuation marks ]
+        """
+        punctuation_marks = DataManager().get_punctuation()
+        for word in text:
+            if word in punctuation_marks:
+                return True
+        return False
+
     def remove_punctuation(self, text:str) -> str:
         """ Removing punctuation marks from text.
         
@@ -47,6 +62,21 @@ class Cleaner(object):
             text = text.replace(mark, "")
         return text
 
+    def has_diacritical(self, text:str) -> bool:
+        """ Checking if text contains diacritical marks.
+        
+        Arguments:
+            text {str} -- [text]
+        
+        Returns:
+            bool -- [ True - if text have diacritical marks | False - if text don't have diacritical marks ]
+        """
+        diacritical_marks = DataManager().get_diacritical()
+        for word in text:
+            if word in diacritical_marks:
+                return True
+        return False
+
     def remove_diacritical(self, text:str) -> str:
         """ Removing diacritical marks from text.
         
@@ -56,11 +86,26 @@ class Cleaner(object):
         Returns:
             str -- [text without diacritical marks]
         """
-        diacritical = DataManager().get_diacritical()
-        for key, value in diacritical.items():
+        diacritical_marks_map = DataManager().get_diacritical_map()
+        for key, value in diacritical_marks_map.items():
             text = text.replace(key, value) # replacing lowercase marks
             text = text.replace(key.upper(), value.upper()) # replacing uppercase marks
         return text
+
+    def has_stopwords(self, text:str) -> bool:
+        """ Checking if text contains stopwords marks.
+        
+        Arguments:
+            text {str} -- [text]
+        
+        Returns:
+            bool -- [ True - if text have stopwords marks | False - if text don't have stopwords marks ]
+        """
+        stopwords = DataManager().get_stopwords()
+        for word in text.split():
+            if word in stopwords:
+                return True
+        return False
 
     def remove_stopwords(self, text:str) -> str:
         """ Removing stopwords from text.
