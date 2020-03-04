@@ -15,7 +15,6 @@ class Cleaner(object):
     - removing stopwords
     - removing rarewords
     - removing frequent words
-    TODO - add is_x methods - checking correctivity of given word/sentence
     
     """
 
@@ -88,7 +87,7 @@ class Cleaner(object):
         """
         diacritical_marks_map = DataManager().get_diacritical_map()
         for key, value in diacritical_marks_map.items():
-            text = text.replace(key, value) # replacing lowercase marks
+            text = text.replace(key, value)                 # replacing lowercase marks
             text = text.replace(key.upper(), value.upper()) # replacing uppercase marks
         return text
 
