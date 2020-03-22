@@ -1,7 +1,7 @@
 try:
     import time
-except ImportError as ie:
-    print(f"IMPORT ERROR -> {ie}")
+except ImportError as ie:   
+    print(f"Import error in {__name__} ---> {ie}")
 
 
 class Corrector(object):

@@ -1,31 +1,41 @@
-try:
-    import time
-    from modules.cleaner import Cleaner
-    from modules.tokenizer import Tokenizer
-    from modules.corrector import Corrector
-    from modules.normalizer import Normalizer
-    from modules.vectorizer import Vectorizer
-except ImportError as ie:
-    print(f"IMPORT ERROR -> {ie}")
+# -*- coding: utf-8 -*-
+""" This module contains main class of polish NLP module.
+
+Polish NLP module contains the following functionalities:
+
+- Cleaning
+- Tokenization
+- Corrector
+- Normalization
+- Vectorization
+
+"""
+
+
+from modules.cleaner import Cleaner
+from modules.tokenizer import Tokenizer
+from modules.corrector import Corrector
+from modules.normalizer import Normalizer
+from modules.vectorizer import Vectorizer
 
 
 class NLP(object):
-    """ Class that handle all of NLP subclasses.
+    """ Class that handle all of Polish NLP subclasses.
 
-    This class contain subclasses like:
-    - Cleaner
-    - Tokenizer
-    - Corrector
-    - Normalizer
-    - Vectorizer
+    This class contains subclasses like:
+    - Cleaner from cleaner module
+    - Tokenizer from tokenizer module
+    - Corrector from corrector module
+    - Normalizer from normalizer module
+    - Vectorizer from vectorizer module
     
     """
     
     def __init__(self):
         """ Initialization of NLP class object.
 
-        This function initialize NLP class objects,
-        with creation of inner objects of all NLP subclasses.
+        This function initialize NLP class object,
+        by creation of inner objects of all NLP subclasses.
 
         """
         self.cleaner = Cleaner()

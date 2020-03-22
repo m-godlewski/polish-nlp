@@ -1,45 +1,57 @@
-try:
-    import time
-    import unicodedata
-    from data_manager import DataManager
-except ImportError as ie:
-    print(f"IMPORT ERROR -> {ie}")
+# -*- coding: utf-8 -*-
+import time
+import unicodedata
+import traceback
+
+from modules.data_manager import DataManager
 
 
 class Cleaner(object):
     """ Class used for cleaning texts from unwanted marks.
 
-    - lowering
+    - lowercasing
     - removing punctuation
     - removing diacritical
     - removing stopwords
-    - removing rarewords
-    - removing frequent words
-    
+    - removing rare words TODO
+    - removing frequent words TODO
+
     """
 
     def __init__(self):
         pass
 
-    def lower(self, text:str) -> str:
-        """ Returns lowercased wersion of text given as argument.
-        
+    def lower(self, text: str) -> str:
+        """ Returns lowercased text.
+
         Arguments:
             text {str} -- [text to lowercase]
-        
+
         Returns:
             str -- [lowercased text]
         """
         return text.lower()
 
-    def has_punctuation(self, text:str) -> bool:
+    def upper(self, text: str) -> str:
+        """ Returns uppercased text.
+
+        Arguments:
+            text {str} -- [text to uppercase]
+
+        Returns:
+            str -- [uppercased text]
+        """
+        return text.upper()
+
+    def has_punctuation(self, text: str) -> bool:
         """ Checking if text contains punctuation marks.
-        
+
         Arguments:
             text {str} -- [text]
-        
+
         Returns:
-            bool -- [ True - if text have punctuation marks | False - if text don't have punctuation marks ]
+            bool -- True - if text have punctuation marks
+                    False - if text don't have punctuation marks
         """
         punctuation_marks = DataManager().get_punctuation()
         for word in text:
@@ -47,12 +59,12 @@ class Cleaner(object):
                 return True
         return False
 
-    def remove_punctuation(self, text:str) -> str:
+    def remove_punctuation(self, text: str) -> str:
         """ Removing punctuation marks from text.
-        
+
         Arguments:
             text {str} -- [text]
-        
+
         Returns:
             str -- [text without punctuation]
         """
@@ -61,12 +73,12 @@ class Cleaner(object):
             text = text.replace(mark, "")
         return text
 
-    def has_diacritical(self, text:str) -> bool:
+    def has_diacritical(self, text: str) -> bool:
         """ Checking if text contains diacritical marks.
-        
+
         Arguments:
             text {str} -- [text]
-        
+
         Returns:
             bool -- [ True - if text have diacritical marks | False - if text don't have diacritical marks ]
         """
@@ -76,27 +88,29 @@ class Cleaner(object):
                 return True
         return False
 
-    def remove_diacritical(self, text:str) -> str:
+    def remove_diacritical(self, text: str) -> str:
         """ Removing diacritical marks from text.
-        
+
         Arguments:
             text {str} -- [text]
-        
+
         Returns:
             str -- [text without diacritical marks]
         """
         diacritical_marks_map = DataManager().get_diacritical_map()
         for key, value in diacritical_marks_map.items():
-            text = text.replace(key, value)                 # replacing lowercase marks
-            text = text.replace(key.upper(), value.upper()) # replacing uppercase marks
+            # replacing lowercase marks
+            text = text.replace(key, value)
+            # replacing uppercase marks
+            text = text.replace(key.upper(), value.upper())
         return text
 
-    def has_stopwords(self, text:str) -> bool:
+    def has_stopwords(self, text: str) -> bool:
         """ Checking if text contains stopwords marks.
-        
+
         Arguments:
             text {str} -- [text]
-        
+
         Returns:
             bool -- [ True - if text have stopwords marks | False - if text don't have stopwords marks ]
         """
@@ -106,12 +120,12 @@ class Cleaner(object):
                 return True
         return False
 
-    def remove_stopwords(self, text:str) -> str:
+    def remove_stopwords(self, text: str) -> str:
         """ Removing stopwords from text.
-        
+
         Arguments:
             text {str} -- [text]
-        
+
         Returns:
             str -- [text without stopwords]
         """

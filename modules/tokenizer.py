@@ -1,8 +1,5 @@
-try:
-    import re
-    import time
-except ImportError as ie:
-    print(f"IMPORT ERROR -> {ie}")
+import re
+import time
 
 
 class Tokenizer(object):
@@ -10,25 +7,25 @@ class Tokenizer(object):
 
     Functionality included:
     - sentence tokenization
-    - word tokenization
+    - text tokenization
     
     """
 
     def __init__(self):
         pass
 
-    def word_tokenization(self, text:str) -> list:
+    def sentence_tokenization(self, text:str) -> list:
         """ Tokenization of sentence to list of words.
         
         Arguments:
-            sentence {str} -- [sentence]
+            text {str} -- [text]
         
         Returns:
             list -- [list of tokens]
         """
         return re.findall(r"[\w']+", text)
 
-    def sentence_tokenization(self, text:str, division_marks:bool=True) -> list:
+    def text_tokenization(self, text:str, division_marks:bool=True) -> list:
         """ Tokenization of text to list of sentences, by '!', '?' and '.' marks.
         
         Arguments:

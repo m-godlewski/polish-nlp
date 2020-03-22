@@ -1,9 +1,6 @@
-try:
-    import time
-    import pandas
-    from typing import Iterable
-except ImportError as ie:
-    print(f"IMPORT ERROR -> {ie}")
+import time
+import pandas
+from typing import Iterable
 
 
 class DataManager(object):
@@ -12,7 +9,7 @@ class DataManager(object):
     """
 
     def __init__(self):
-        self.DATA_PATH = "../data/"
+        self.DATA_PATH = "/home/mateusz/Python/polish-nlp/data/" # TODO - change to relative path
         self.DATA_FILES = {
             "punctuation" : self.DATA_PATH + "polish_punctuation.txt",
             "stopwords" : self.DATA_PATH + "polish_stopwords.txt",
